@@ -3,7 +3,6 @@ import classes from "./ExpenseForm.module.css";
 const ExpenseForm = (props) => {
   return (
     <section>
-      <h2>ADD NEW TRANSACTION</h2>
       <form className={classes.form}>
         <div className={classes.control}>
           <label htmlFor="category">Transaction category</label>
@@ -44,6 +43,7 @@ const ExpenseForm = (props) => {
           </select>
         </div>
         <div className={classes.actions}>
+          <button type="button">Cancel</button>
           <button type="submit">Add Transaction</button>
         </div>
       </form>
