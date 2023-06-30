@@ -33,6 +33,7 @@
   background-repeat: no-repeat;
   animation: bg-spin 3s linear infinite;
 }
+
 @keyframes bg-spin {
   to {
     --border-angle: 1turn;
@@ -61,3 +62,43 @@
   font-size: 1.4rem;
   margin: 0;
 }
+
+.income {
+  background-image: conic-gradient(
+      from var(--border-angle),
+      rgb(18, 9, 27),
+      rgb(7, 7, 14) 50%,
+      rgb(11, 5, 17)
+    ),
+    conic-gradient(
+      from var(--border-angle),
+      transparent 20%,
+      rgb(227, 227, 14),
+      rgb(202, 178, 27)
+    );
+}
+
+.income p{
+  color: rgb(44, 137, 243)
+}
+
+.expense {
+  background-image: conic-gradient(
+      from var(--border-angle),
+      rgb(18, 9, 27),
+      rgb(7, 7, 14) 50%,
+      rgb(11, 5, 17)
+    ),
+    conic-gradient(
+      from var(--border-angle),
+      transparent 20%,
+      rgb(241, 7, 7),
+      rgb(163, 29, 22)
+    );
+
+}
+
+.expense p{
+  color: rgb(239, 88, 88);
+}
+

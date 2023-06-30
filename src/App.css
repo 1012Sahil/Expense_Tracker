@@ -16,3 +16,8 @@ body {
   color: white;
   margin: 2rem auto;
 }
+
+h2 {
+  text-align: center;
+  font-weight: 400;
+}

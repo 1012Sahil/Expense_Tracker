@@ -10,8 +10,8 @@ const ExpenseState = (props) => {
       </div>
 
       <div className={styles.curState}>
-        <Card title="INCOME" amount="1000"></Card>
-        <Card title="EXPENSE" amount="500"></Card>
+        <Card title="INCOME" amount="1000" customId="income"></Card>
+        <Card title="EXPENSE" amount="500" customId="expense"></Card>
       </div>
     </section>
   );
