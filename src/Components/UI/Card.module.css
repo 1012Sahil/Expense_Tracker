@@ -1,0 +1,63 @@
+.Card {
+  width: 40%;
+  height: 4rem;
+  text-align: start;
+  align-items: center;
+  text-transform: uppercase;
+  margin: 0rem 0.25rem 0.5rem 0rem;
+  padding: 0.5rem 0.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  --border-size: 3px;
+  --border-angle: 0turn;
+  background-image: conic-gradient(
+      from var(--border-angle),
+      rgb(18, 9, 27),
+      rgb(7, 7, 14) 50%,
+      rgb(11, 5, 17)
+    ),
+    conic-gradient(
+      from var(--border-angle),
+      transparent 20%,
+      rgb(16, 247, 212),
+      rgb(9, 116, 57)
+    );
+  background-size: calc(100% - (var(--border-size) * 2))
+      calc(100% - (var(--border-size) * 2)),
+    cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  animation: bg-spin 3s linear infinite;
+}
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+.Card:hover {
+  animation-play-state: paused;
+}
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+.Card h3 {
+  padding: 0.25rem 0.5rem;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.Card p {
+  align-self: center;
+  text-align: left;
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin: 0;
+}

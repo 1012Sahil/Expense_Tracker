@@ -1,0 +1,39 @@
+.history {
+  text-align: center;
+  align-items: center;
+  width: 29rem;
+  padding: 0.5rem;
+  margin: 1rem auto;
+}
+
+.history .head {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.history .head h2 {
+  margin: 0;
+  padding: 0.25rem;
+  font-weight: 300;
+}
+
+.history .head svg {
+  margin-top: 0.5rem;
+  width: 30px;
+  height: 30px;
+}
+
+.history .head svg:hover {
+    display: inline;
+    color: rgb(24, 240, 24);
+  transition: ease-in-out 0.25s;
+}
+
+.history hr {
+  width: inherit;
+}
+
+.history .list {
+  padding: 0;
+}
