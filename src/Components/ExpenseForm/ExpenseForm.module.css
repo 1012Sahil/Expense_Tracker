@@ -46,6 +46,7 @@
 .control select option {
     color: white;
     background: black;
+    font-size: 1.1rem;
 }
 
 .actions {

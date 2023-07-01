@@ -31,6 +31,6 @@
 .tile span svg:hover{
   fill: white;
   color: rgb(224, 21, 21);
-  transition: ease-in-out 0.25s;
+  transition: ease-in-out 0.15s;
   
 }
