@@ -3,6 +3,8 @@ import ExpenseList from "./ExpenseList";
 // show only last 3-4 expenses unless specifically indicated
 // For full history, click the button below and a modal should show the full history sorted by year
 const Expenses = (props) => {
+  
+
   return (
     <div className={classes.history}>
       <div className={classes.head}>

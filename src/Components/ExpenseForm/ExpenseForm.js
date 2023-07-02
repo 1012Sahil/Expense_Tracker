@@ -1,9 +1,13 @@
 import classes from "./ExpenseForm.module.css";
 
 const ExpenseForm = (props) => {
+  // TODO
+  const formSubmitHandler = event => {
+    event.preventDefault();
+  }
   return (
     <section>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={formSubmitHandler}>
         <div className={classes.control}>
           <label htmlFor="category">Transaction category</label>
           <select id="category">
@@ -43,8 +47,8 @@ const ExpenseForm = (props) => {
           </select>
         </div>
         <div className={classes.actions}>
-          <button type="button">Cancel</button>
-          <button type="submit">Add Transaction</button>
+          <button type="button" onClick={props.onClose}>Cancel</button>
+          <button type="submit" onClick={props.onClose}>Add Transaction</button>
         </div>
       </form>
     </section>
