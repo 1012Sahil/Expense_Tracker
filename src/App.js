@@ -14,6 +14,22 @@ const App = () => {
       return !prevState;
     });
   };
+
+  const submitTransactionHandler = async (formData) => {
+    await fetch(
+      `https://expense-tracker-8d43a-default-rtdb.firebaseio.com/expenseList/${formData.year}.json`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          amount: formData.amount,
+          desc: formData.desc,
+          category: formData.category,
+          type: formData.type,
+        }),
+      }
+    );
+  };
+
   return (
     <Fragment>
       <h2>Expense Tracker</h2>
@@ -31,7 +47,12 @@ const App = () => {
               ADD NEW TRANSACTION
             </button>
           )}
-          {formVisibility && <ExpenseForm onClose={formVisibilityHandler} />}
+          {formVisibility && (
+            <ExpenseForm
+              onClose={formVisibilityHandler}
+              onConfirm={submitTransactionHandler}
+            />
+          )}
           <ExpenseState />
           <Expenses />
         </div>

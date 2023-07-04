@@ -15,12 +15,12 @@
   margin-bottom: 0.25rem;
   padding: 0.25rem 0;
   display: block;
-  color: #59C1BD;
+  color: #59c1bd;
   text-transform: uppercase;
 }
 
 .control input {
-    color: white;
+  color: white;
   font: inherit;
   border-radius: 4px;
   width: 24rem;
@@ -32,8 +32,8 @@
 }
 
 .control select {
-    color: white;
-    background: transparent;
+  color: white;
+  background: transparent;
   font: inherit;
   padding: 0.5rem 0 0.5rem 0.5rem;
   border-radius: 4px;
@@ -44,9 +44,9 @@
 }
 
 .control select option {
-    color: white;
-    background: black;
-    font-size: 1.1rem;
+  color: white;
+  background: black;
+  font-size: 1.1rem;
 }
 
 .actions {
@@ -97,4 +97,15 @@
     rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
     rgba(44, 187, 99, 0.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
+}
+
+.invalid label {
+  color: #ca3e51;
+}
+
+.invalid input,
+.invalid select {
+  border-color: #aa0b20;
+  background-color: #FF5733;
+ 
 }

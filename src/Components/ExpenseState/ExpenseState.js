@@ -77,7 +77,7 @@ if (expenseStates.length === 0) { // if this is not taken care of, page will ret
       <div className={styles["year-control"]}>
         <div className={styles.balance}>
           <h3>YOUR BALANCE</h3>
-          <p>{selectedYearExpenses.balance}</p>
+          <p>${selectedYearExpenses.balance}</p>
         </div>
         <div className={styles.yearSelector}>
           <label htmlFor="year">Select Year</label>
