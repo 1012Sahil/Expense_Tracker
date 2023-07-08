@@ -1,19 +1,22 @@
-import { useEffect, useState } from "react";
-//import Select from 'react-select'
+import { useEffect, useState, useContext } from "react";
 import Card from "../UI/Card";
 import styles from "./ExpenseState.module.css";
+import YearContext from "../../store/selectedYear-card-context";
 
 const ExpenseState = (props) => {
   // use state for managing the selected year
   // on first render, display the data of latest year and if a new year is added, display that
   const [selectedYear, setSelectedYear] = useState();
-  const [expenseStates, setExpenseStates] = useState([]);
+  const [yearData, setYearData] = useState([]);
   /* show only those years that are stored in the database. For this, fetch from firebase the years 
   and use array.map() function to provide the options based on the available years.
-  
+
   By the useEffect hook, make sure that when page first renders, the expense state of most recent year 
   is shown.
   */
+  // Using the Context API, I'm storing all the year data into a context object so that I
+  // can use it in other components without prop drilling
+  const yearCtx = useContext(YearContext);
 
   useEffect(() => {
     const fetchYears = async () => {
@@ -28,7 +31,7 @@ const ExpenseState = (props) => {
       // in firebase, each node has a unique id and our data is nested inside this node
       let latestYear = 0;
       for (const key in responseData) {
-        latestYear = Math.max(latestYear, +responseData[key].year)
+        latestYear = Math.max(latestYear, +responseData[key].year);
         loadedExpenseStates.push({
           id: key,
           year: +responseData[key].year,
@@ -36,37 +39,46 @@ const ExpenseState = (props) => {
           balance: +responseData[key].Budget,
         });
       }
-
+      setYearData(loadedExpenseStates);
       setSelectedYear(latestYear);
-      setExpenseStates(loadedExpenseStates);
-
-      //console.log(latestYear);
-      //console.log(loadedExpenseStates);
     };
     fetchYears().catch((error) => {
       // use a state to keep track of error states.
     });
   }, []);
 
+  /* One of the most difficult steps till yet was to send data to the context object correctly from a 
+component that renders due to state changes and useEffect after first fetching data from Firebase. 
+We will first set the yearData and only after it is set, we will provide data to the yearCtx in another
+useEffect hook.*/
+  useEffect(() => {
+    if (yearData.length !== 0) {
+      // console.log("YEAR CTX");
+      yearCtx.loadYears(yearData);
+      // console.log(yearCtx.expenseStates);
+    }
+  }, [yearData, yearCtx]);
+
+  /* If on first render or if no data available, render the below */
+  if (yearData.length === 0) {
+    // if this is not taken care of, page will return error as selected years will be left null
+    // and selectedYearExpenses is not defined properly
+    return;
+  }
+
   // this list will contain the options mapped to the available years
-  const options = expenseStates.map((state) => (
+  const options = yearData.map((state) => (
     <option key={state.id} value={+state.year}>
       {state.year}
     </option>
   ));
-  // console.log("BEFORE");
   // console.log(expenseStates);
   // console.log(selectedYear);
 
-
   // show data of the selected Year
-  let selectedYearExpenses = expenseStates.find(
+  let selectedYearExpenses = yearData.find(
     (selectedYearStatus) => selectedYearStatus.year === selectedYear
   );
-/* If on first render or if no data available, render the below */
-if (expenseStates.length === 0) { // if this is not taken care of, page will return error 
-  selectedYearExpenses = {balance: 0, income: 0};
-}
 
   // console.log("AFTER");
   // console.log(expenseStates);

@@ -1,13 +1,14 @@
-import { Fragment, useState } from "react";
+import { useState} from "react";
+import "./App.css";
 import Expenses from "./Components/Expenses/Expenses";
 import ExpenseState from "./Components/ExpenseState/ExpenseState";
+import YearProvider from "./store/YearProvider";
 import ExpenseForm from "./Components/ExpenseForm/ExpenseForm";
 import PieChart from "./Components/VisualRep/PieChart";
-import "./App.css";
+import ExpenseGraph from "./Components/VisualRep/ExpenseGraph";
 
 const App = () => {
   const [formVisibility, setFormVisibility] = useState(false);
-
   // show the ExpenseForm only when add new transaction button is clicked
   const formVisibilityHandler = (event) => {
     setFormVisibility((prevState) => {
@@ -16,6 +17,7 @@ const App = () => {
   };
 
   const submitTransactionHandler = async (formData) => {
+    // If a new year is added that previously didn't exist, we used string literals for that also
     await fetch(
       `https://expense-tracker-8d43a-default-rtdb.firebaseio.com/expenseList/${formData.year}.json`,
       {
@@ -30,12 +32,15 @@ const App = () => {
     );
   };
 
+  /* When React renders a component that subscribes to this Context object it will read the current context
+value from the closest matching Provider above it in the tree. */
   return (
-    <Fragment>
+    <YearProvider>
       <h2>Expense Tracker</h2>
       <section className="main">
         <div className="left">
           <PieChart></PieChart>
+          <ExpenseGraph></ExpenseGraph>
         </div>
         <div className="right">
           {!formVisibility && (
@@ -57,7 +62,7 @@ const App = () => {
           <Expenses />
         </div>
       </section>
-    </Fragment>
+    </YearProvider>
   );
 };
 
