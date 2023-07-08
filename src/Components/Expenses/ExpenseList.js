@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Tile from "../UI/Tile";
 import classes from "./ExpenseList.module.css";
 
@@ -16,6 +16,13 @@ const ExpenseList = (props) => {
                                                            PieChart    Expenses -> ExpenseList
    
   */
+  const [curSelectedYear, setSelectedYear] = useState(null);
+  useEffect(() => {
+    setSelectedYear(props.currentSelectedYear);
+  }, [props]);
+
+  // console.log("FROM EXPENSE LIST");
+  // console.log(props.currentSelectedYear);
   return (
     <Fragment>
       <ul className={classes.list}>

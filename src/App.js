@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import "./App.css";
 import Expenses from "./Components/Expenses/Expenses";
 import ExpenseState from "./Components/ExpenseState/ExpenseState";
@@ -9,11 +9,16 @@ import ExpenseGraph from "./Components/VisualRep/ExpenseGraph";
 
 const App = () => {
   const [formVisibility, setFormVisibility] = useState(false);
+  const [currentSelectedYear, setCurrentYear] = useState(null);
   // show the ExpenseForm only when add new transaction button is clicked
   const formVisibilityHandler = (event) => {
     setFormVisibility((prevState) => {
       return !prevState;
     });
+  };
+
+  const selectedYearAssigner = (year) => {
+    setCurrentYear(year);
   };
 
   const submitTransactionHandler = async (formData) => {
@@ -32,6 +37,9 @@ const App = () => {
     );
   };
 
+  // console.log("FROM APP JS");
+  // console.log(currentSelectedYear);
+
   /* When React renders a component that subscribes to this Context object it will read the current context
 value from the closest matching Provider above it in the tree. */
   return (
@@ -39,7 +47,7 @@ value from the closest matching Provider above it in the tree. */
       <h2>Expense Tracker</h2>
       <section className="main">
         <div className="left">
-          <PieChart></PieChart>
+          <PieChart currentSelectedYear={currentSelectedYear}></PieChart>
           <ExpenseGraph></ExpenseGraph>
         </div>
         <div className="right">
@@ -58,8 +66,8 @@ value from the closest matching Provider above it in the tree. */
               onConfirm={submitTransactionHandler}
             />
           )}
-          <ExpenseState />
-          <Expenses />
+          <ExpenseState onYearSelect={selectedYearAssigner} />
+          <Expenses currentSelectedYear={currentSelectedYear} />
         </div>
       </section>
     </YearProvider>

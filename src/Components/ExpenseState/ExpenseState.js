@@ -6,7 +6,7 @@ import YearContext from "../../store/selectedYear-card-context";
 const ExpenseState = (props) => {
   // use state for managing the selected year
   // on first render, display the data of latest year and if a new year is added, display that
-  const [selectedYear, setSelectedYear] = useState();
+  const [selectedYear, setSelectedYear] = useState(null);
   const [yearData, setYearData] = useState([]);
   /* show only those years that are stored in the database. For this, fetch from firebase the years 
   and use array.map() function to provide the options based on the available years.
@@ -58,6 +58,11 @@ useEffect hook.*/
       // console.log(yearCtx.expenseStates);
     }
   }, [yearData, yearCtx]);
+
+  // send the selected year to App.js
+  useEffect(() => {
+    props.onYearSelect(selectedYear);
+  }, [props, selectedYear]);
 
   /* If on first render or if no data available, render the below */
   if (yearData.length === 0) {

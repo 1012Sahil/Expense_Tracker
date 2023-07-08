@@ -26,7 +26,7 @@ const Expenses = (props) => {
       </div>
       <hr />
       <section className={classes.list}>
-        <ExpenseList />
+        <ExpenseList currentSelectedYear={props.currentSelectedYear} />
       </section>
     </div>
   );
