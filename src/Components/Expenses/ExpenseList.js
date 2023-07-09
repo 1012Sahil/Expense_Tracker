@@ -24,16 +24,30 @@ const ExpenseList = (props) => {
     console.log("LIST");
     console.log(props.selectedYearTransactions);
   }, [props.selectedYearTransactions]);
-
   // console.log("FROM EXPENSE LIST");
   // console.log(props.currentSelectedYear);
+  let listElements;
+  if (selectedYearExpenseList.length > 0) {
+    listElements = selectedYearExpenseList[0].transactions.map(
+      (listElement) => (
+        <Tile
+          key={listElement.id}
+          expenseTitle={listElement.desc}
+          expenseAmount={listElement.amount}
+        />
+      )
+    );
+  }
+  console.log("LIST ELEMENTS");
+  console.log(listElements);
   return (
     <Fragment>
       <ul className={classes.list}>
+        {/* <Tile expenseTitle="Groceries" expenseAmount="5" />
         <Tile expenseTitle="Groceries" expenseAmount="5"></Tile>
         <Tile expenseTitle="Groceries" expenseAmount="5"></Tile>
-        <Tile expenseTitle="Groceries" expenseAmount="5"></Tile>
-        <Tile expenseTitle="Groceries" expenseAmount="5"></Tile>
+        <Tile expenseTitle="Groceries" expenseAmount="5"></Tile> */}
+        {listElements}
       </ul>
     </Fragment>
   );
