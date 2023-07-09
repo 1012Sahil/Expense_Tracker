@@ -16,10 +16,14 @@ const ExpenseList = (props) => {
                                                            PieChart    Expenses -> ExpenseList
    
   */
-  const [curSelectedYear, setSelectedYear] = useState(null);
+  // The selectedYearExpenseList already possesses the selectedYear as a key-value
+  const [selectedYearExpenseList, setExpenseList] = useState([]);
+  /* This component is rendering two times each time, fix this */
   useEffect(() => {
-    setSelectedYear(props.currentSelectedYear);
-  }, [props]);
+    setExpenseList(props.selectedYearTransactions);
+    console.log("LIST");
+    console.log(props.selectedYearTransactions);
+  }, [props.selectedYearTransactions]);
 
   // console.log("FROM EXPENSE LIST");
   // console.log(props.currentSelectedYear);

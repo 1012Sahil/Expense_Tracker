@@ -28,7 +28,7 @@ const App = () => {
       {
         method: "POST",
         body: JSON.stringify({
-          amount: formData.amount,
+          amount: +formData.amount,
           desc: formData.desc,
           category: formData.category,
           type: formData.type,

@@ -7,6 +7,7 @@ const ExpenseState = (props) => {
   // use state for managing the selected year
   // on first render, display the data of latest year and if a new year is added, display that
   const [selectedYear, setSelectedYear] = useState(null);
+  const [error, setError] = useState(null);
   const [yearData, setYearData] = useState([]);
   /* show only those years that are stored in the database. For this, fetch from firebase the years 
   and use array.map() function to provide the options based on the available years.
@@ -44,6 +45,7 @@ const ExpenseState = (props) => {
     };
     fetchYears().catch((error) => {
       // use a state to keep track of error states.
+      setError(error.message);
     });
   }, []);
 
@@ -109,6 +111,7 @@ useEffect hook.*/
           </select>
         </div>
       </div>
+      {error && <p>{error}</p>}
       <div className={styles.curState}>
         <Card
           title="INCOME"
