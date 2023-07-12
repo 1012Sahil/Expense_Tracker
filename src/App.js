@@ -3,6 +3,7 @@ import "./App.css";
 import Expenses from "./Components/Expenses/Expenses";
 import ExpenseState from "./Components/ExpenseState/ExpenseState";
 import YearProvider from "./store/YearProvider";
+import ExpenseListProvider from "./store/ExpenseListProvider";
 import ExpenseForm from "./Components/ExpenseForm/ExpenseForm";
 import PieChart from "./Components/VisualRep/PieChart";
 import ExpenseGraph from "./Components/VisualRep/ExpenseGraph";
@@ -45,34 +46,36 @@ const App = () => {
   /* When React renders a component that subscribes to this Context object it will read the current context
 value from the closest matching Provider above it in the tree. */
   return (
+    <ExpenseListProvider>
     <YearProvider>
-      <h2>Expense Tracker</h2>
-      <section className="main">
-        <div className="left">
-          <PieChart currentSelectedYear={currentSelectedYear}></PieChart>
-          <ExpenseGraph></ExpenseGraph>
-        </div>
-        <div className="right">
-          {!formVisibility && (
-            <button
-              type="button"
-              id="form-control"
-              onClick={formVisibilityHandler}
-            >
-              ADD NEW TRANSACTION
-            </button>
-          )}
-          {formVisibility && (
-            <ExpenseForm
-              onClose={formVisibilityHandler}
-              onConfirm={submitTransactionHandler}
-            />
-          )}
-          <ExpenseState onYearSelect={selectedYearAssigner} />
-          <Expenses currentSelectedYear={currentSelectedYear} />
-        </div>
-      </section>
+        <h2>Expense Tracker</h2>
+        <section className="main">
+          <div className="left">
+            <PieChart currentSelectedYear={currentSelectedYear}></PieChart>
+            <ExpenseGraph></ExpenseGraph>
+          </div>
+          <div className="right">
+            {!formVisibility && (
+              <button
+                type="button"
+                id="form-control"
+                onClick={formVisibilityHandler}
+              >
+                ADD NEW TRANSACTION
+              </button>
+            )}
+            {formVisibility && (
+              <ExpenseForm
+                onClose={formVisibilityHandler}
+                onConfirm={submitTransactionHandler}
+              />
+            )}
+            <ExpenseState onYearSelect={selectedYearAssigner} />
+            <Expenses currentSelectedYear={currentSelectedYear} />
+          </div>
+        </section>
     </YearProvider>
+    </ExpenseListProvider>
   );
 };
 

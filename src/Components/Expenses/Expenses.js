@@ -1,13 +1,16 @@
+import { useEffect, useState, useContext } from "react";
 import classes from "./Expenses.module.css";
 import ExpenseList from "./ExpenseList";
-import { useEffect, useState } from "react";
-// show only last 3-4 expenses unless specifically indicated
-// For full history, click the button below and a modal should show the full history sorted by year
+import ExpenseListContext from "../../store/expenseList-card-context";
+
 const Expenses = (props) => {
   // write code to fetch expenseList from firebase.
   // After fetching data from Firebase, store this data in Context object for transactions
   const [allExpenseData, setExpenseData] = useState([]);
-  const [selectedYearTransactions, setSelYearTransactions] = useState([]);
+  //const [selectedYearTransactions, setSelYearTransactions] = useState([]);
+
+  // Implement Context functionalities to store expense data.
+  const listDataCtx = useContext(ExpenseListContext);
 
   useEffect(() => {
     const fetchExpenses = async () => {
@@ -41,17 +44,33 @@ const Expenses = (props) => {
         };
         loadedExpenseData.push(yearData);
       }
-      //console.log("LOADED EXPENSE DATA");
-      //console.log(loadedExpenseData);
+      // console.log("LOADED EXPENSE DATA");
+      // console.log(loadedExpenseData);
       setExpenseData(loadedExpenseData);
     };
     fetchExpenses().catch((error) => {});
   }, []);
 
-   useEffect(() => {
-    const filteredExpenseData = allExpenseData.filter(expense => expense.year === props.currentSelectedYear);
-    setSelYearTransactions(filteredExpenseData);
-  }, [allExpenseData, props.currentSelectedYear]);
+  /* We are using the useEffect hook to wrap our call to loadExpenseList fn in ExpenseListProvider. 
+  We have combined this with the previous useEffect that managed the selectedYearTransactions, but 
+  we don't need this anymore as we can just use our context object to manage this! 
+  The code is giving us a warning that listDataCtx is not added as a dependency, but if we do that, 
+  we end up creating an infinite loop that renders the component infinitely. So, we are ignoring the 
+  warning as the current behaviour is what we require.*/
+  useEffect(() => {
+    if (allExpenseData.length !== 0) {
+      // console.log("listDataCTX");
+      // console.log(allExpenseData);
+      listDataCtx.loadExpenseList(allExpenseData);
+      // console.log(listDataCtx.allYearExpenses);
+      // console.log(listDataCtx.allYearTransactions);
+    }
+  }, [allExpenseData]);
+  // console.log("listDataCTX2");
+  // console.log(listDataCtx.allYearExpenses);
+  // console.log(listDataCtx.allYearTransactions);
+
+  /*useEffect(() => {}, [allExpenseData, ]);*/
   //const filteredExpenseData = allExpenseData.filter(expense => expense.year === props.currentSelectedYear);
   return (
     <div className={classes.history}>
@@ -61,10 +80,8 @@ const Expenses = (props) => {
       <hr />
       <section className={classes.list}>
         {/* Pass only the data of the year selected. */}
-        {allExpenseData.length > 0 && (
-          <ExpenseList
-            selectedYearTransactions={selectedYearTransactions}
-          />
+        {listDataCtx.allYearTransactions.length > 0 && (
+          <ExpenseList currentSelectedYear={props.currentSelectedYear} />
         )}
       </section>
     </div>
