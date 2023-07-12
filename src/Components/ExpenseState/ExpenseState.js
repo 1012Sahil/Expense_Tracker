@@ -2,6 +2,7 @@ import { useEffect, useState, useContext, Fragment } from "react";
 import Card from "../UI/Card";
 import styles from "./ExpenseState.module.css";
 import YearContext from "../../store/selectedYear-card-context";
+import ExpenseListContext from "../../store/expenseList-card-context";
 
 const ExpenseState = (props) => {
   // use state for managing the selected year
@@ -19,6 +20,7 @@ const ExpenseState = (props) => {
   // Using the Context API, I'm storing all the year data into a context object so that I
   // can use it in other components without prop drilling
   const yearCtx = useContext(YearContext);
+  const listDataCtx = useContext(ExpenseListContext);
 
   useEffect(() => {
     const fetchYears = async () => {
@@ -90,6 +92,15 @@ useEffect hook.*/
     (selectedYearStatus) => selectedYearStatus.year === selectedYear
   );
 
+  let expensesAmountForYear;
+  if (listDataCtx.allYearExpenses.length > 0) {
+    const expenseDataForSelectedYear = listDataCtx.allYearExpenses.findIndex(
+      (data) => data.year === selectedYear
+    );
+    expensesAmountForYear =
+      listDataCtx.allYearExpenses[expenseDataForSelectedYear].expenseAmount;
+  }
+
   // console.log("AFTER");
   // console.log(expenseStates);
   // console.log(selectedYearExpenses);
@@ -125,7 +136,7 @@ useEffect hook.*/
           amount={selectedYearExpenses?.income}
           customId="income"
         ></Card>
-        <Card title="EXPENSE" amount="2500" customId="expense"></Card>
+        <Card title="EXPENSE" amount={expensesAmountForYear} customId="expense"></Card>
       </div>
     </Fragment>
   );
