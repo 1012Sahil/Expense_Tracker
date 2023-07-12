@@ -3,8 +3,13 @@ import classes from "./Tile.module.css";
 const Tile = (props) => {
   const expenseDeleteHandler = (event) => {};
   // delete should only be visible on hover
+  // The border right color should indicate whether the transaction was an expense or an income one.
+  const tileClasses =
+    props.expenseType === "income"
+      ? `${classes.tile} ${classes.income}`
+      : `${classes.tile}`;
   return (
-    <div className={classes.tile}>
+    <div className={`${tileClasses}`}>
       <span onClick={expenseDeleteHandler}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

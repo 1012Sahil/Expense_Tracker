@@ -34,6 +34,7 @@ const ExpenseList = (props) => {
           key={listElement.id}
           expenseTitle={listElement.desc}
           expenseAmount={listElement.amount}
+          expenseType={listElement.type}
         />
       )
     );
@@ -43,10 +44,6 @@ const ExpenseList = (props) => {
   return (
     <Fragment>
       <ul className={classes.list}>
-        {/* <Tile expenseTitle="Groceries" expenseAmount="5" />
-        <Tile expenseTitle="Groceries" expenseAmount="5"></Tile>
-        <Tile expenseTitle="Groceries" expenseAmount="5"></Tile>
-        <Tile expenseTitle="Groceries" expenseAmount="5"></Tile> */}
         {listElements}
       </ul>
     </Fragment>

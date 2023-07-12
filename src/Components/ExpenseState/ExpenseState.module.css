@@ -82,3 +82,9 @@
   font-size: 1.25rem;
   background: black;
 }
+
+.loading {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}

@@ -22,6 +22,8 @@ const App = () => {
   };
 
   const submitTransactionHandler = async (formData) => {
+    /* Whenever a new transaction is added, add it to the context object so we don't need to reload the page or fetch details 
+  from Firebase repeatedely. */
     // If a new year is added that previously didn't exist, we used string literals for that also
     await fetch(
       `https://expense-tracker-8d43a-default-rtdb.firebaseio.com/expenseList/${formData.year}.json`,

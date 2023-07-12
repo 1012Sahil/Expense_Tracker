@@ -19,12 +19,14 @@ const ExpenseForm = (props) => {
     expenseType: true,
   });
 
+  /* Consider moving the form to another component to refactor code */
+
   const categoryInputRef = useRef();
   const yearInputRef = useRef();
   const descInputRef = useRef();
   const amountInputRef = useRef();
   const typeInputRef = useRef();
-  // TODO
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
     const enteredCategory = categoryInputRef.current.value;
