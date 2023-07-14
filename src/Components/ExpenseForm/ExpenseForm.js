@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useId } from "react";
 import classes from "./ExpenseForm.module.css";
+import ExpenseListContext from "../../store/expenseList-card-context";
 
 // functions to check validity of form input data
 const yearValidityChecker = (value) => value >= 2000 && value <= 2030;
@@ -19,6 +20,10 @@ const ExpenseForm = (props) => {
     expenseType: true,
   });
 
+  const randomIdForNewTransaction = useId();
+
+  // When a new transaction is added, add it to list context object also
+  const listDataCtx = useContext(ExpenseListContext);
   /* Consider moving the form to another component to refactor code */
 
   const categoryInputRef = useRef();
@@ -76,6 +81,14 @@ const ExpenseForm = (props) => {
       desc: enteredDesc,
     });
 
+    /* Add the functionality to add a new transaction to the yearContext. */
+    listDataCtx.addNewTransaction(enteredYear, {
+      id: randomIdForNewTransaction,
+      amount: +entererdAmount,
+      category: enteredCategory,
+      desc: enteredDesc,
+      type: enteredType
+    });
     // close form
     props.onClose();
     // SUBMIT DATA -> pass the data in form of an object to the app.js file, where you connect to firebase and send data

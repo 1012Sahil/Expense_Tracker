@@ -19,8 +19,9 @@ const ExpenseList = (props) => {
    
   */
   // The selectedYearExpenseList already possesses the selectedYear as a key-value
-  // console.log("ELIST CTX");
-  // console.log(listDataCtx.allYearExpenses);
+  console.log("ELIST CTX");
+  console.log(listDataCtx.allYearExpenses);
+  console.log(listDataCtx.allYearTransactions);
   const [selectedYearExpenseList, setExpenseList] = useState([]);
   /* This component is rendering two times each time, fix this */
   useEffect(() => {

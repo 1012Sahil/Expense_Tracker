@@ -39,18 +39,20 @@ const listDataReducer = (state, action) => {
     // Either the transaction belongs to an existing year, or it is the first transaction of a year.
     let updatedListData;
     let updatedList = state.allYearTransactions;
+    // console.log("NEW TRANSACTION");
+    // console.log(action.newTransaction);
     let updatedExpenseAmountData = state.allYearExpenses;
-    let yearOfTransaction = action.newTransaction.year;
-    let amountToBeAdded = action.newTransaction.amount;
+    let yearOfTransaction = +action.YOT;
+    let amountToBeAdded = +action.newTransaction.amount;
     if (action.newTransaction.type === "income") {
       amountToBeAdded *= -1; // as this amount reduces our expense for year.
     }
-
-    const existingExpenseAmountIndex = state.allYearExpenses.findIndex(
+    // error is here, index returned is -1
+    const existingExpenseAmountIndex = updatedExpenseAmountData.findIndex(
       (data) => data.year === yearOfTransaction
     );
 
-    if (existingExpenseAmountIndex) {
+    if (existingExpenseAmountIndex !== -1) {
       updatedExpenseAmountData[existingExpenseAmountIndex].expenseAmount +=
         amountToBeAdded;
       const existingExpenseListYearIndex = updatedList.findIndex(
@@ -60,16 +62,21 @@ const listDataReducer = (state, action) => {
         action.newTransaction
       );
     } else {
+      const newTransactionArray = [];
+      newTransactionArray.push(action.newTransaction);
       // first transaction of year
-      updatedList.push(action.newTransaction);
+      updatedList.push({
+        year: yearOfTransaction,
+        transactions: newTransactionArray
+      });
       updatedExpenseAmountData.push({
         year: yearOfTransaction,
-        expenseAmount: amountToBeAdded,
+        expenseAmount: +amountToBeAdded,
       });
     }
     updatedListData = {
-      allYearExpenses: updatedList,
-      allYearTransactions: updatedExpenseAmountData,
+      allYearExpenses: updatedExpenseAmountData,
+      allYearTransactions: updatedList,
     };
     return updatedListData;
   }
@@ -96,8 +103,9 @@ const ExpenseListProvider = (props) => {
 
   // Will add a new transaction for a particular year so as to prevent refetching from Firebase.
   // newTransaction will be an object holding transaction data, this will have been posted to Firebase also.
-  const addNewTransaction = (newTransaction) => {
-    dispatchListAction({ type: "ADD", newTransaction: newTransaction });
+  const addNewTransaction = (YOT, newTransaction) => {
+    // YOT is year of transaction
+    dispatchListAction({ type: "ADD", YOT : YOT, newTransaction: newTransaction });
   };
 
   // Will delete an existing transaction from list and also from firebase (A challenge)

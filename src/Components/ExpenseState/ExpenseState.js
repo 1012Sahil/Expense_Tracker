@@ -92,6 +92,8 @@ useEffect hook.*/
     (selectedYearStatus) => selectedYearStatus.year === selectedYear
   );
 
+  /* The below assumes that the feature to add a new year status is not implemented. The code may need 
+  to be modified if we add that functionality */
   let expensesAmountForYear;
   if (listDataCtx.allYearExpenses.length > 0) {
     const expenseDataForSelectedYear = listDataCtx.allYearExpenses.findIndex(
