@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 body {
+  font-family: "PT Sans", sans-serif;
   background: #0f2027; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -15,6 +18,13 @@ body {
 
   color: white;
   margin: 2rem auto;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 3rem;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -34,9 +44,11 @@ h2 {
 
 .left {
   align-items: center;
+  padding-bottom: 1.6rem;
 }
 
 .right {
+  padding-top: 1.5rem;
   align-items: center;
 }
 
@@ -55,7 +67,8 @@ h2 {
   cursor: pointer;
   border: 3px solid;
   padding: 0.25rem 1rem;
-  box-shadow: 1px 1px 0px 0px black, 2px 2px 0px 0px blue, 3px 3px 0px 0px green, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  box-shadow: 1px 1px 0px 0px black, 2px 2px 0px 0px blue, 3px 3px 0px 0px green,
+    4px 4px 0px 0px, 5px 5px 0px 0px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;

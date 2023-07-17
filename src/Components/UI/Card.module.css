@@ -73,8 +73,8 @@
     conic-gradient(
       from var(--border-angle),
       transparent 20%,
-      rgb(227, 227, 14),
-      rgb(202, 178, 27)
+      rgb(14, 195, 227),
+      rgb(6, 50, 184)
     );
 }
 

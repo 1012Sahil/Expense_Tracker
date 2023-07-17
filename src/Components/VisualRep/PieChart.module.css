@@ -1,0 +1,10 @@
+.pie{
+    height: 30rem;
+    width: 48rem;
+}
+
+.pie h2 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-weight: 400;
+}

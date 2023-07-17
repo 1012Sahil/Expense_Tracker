@@ -78,14 +78,17 @@ useEffect hook.*/
   //   return <p>No Data Found!</p>;
   // }
 
+  // first sort year data according to year
+  const sortedYearData = yearData.sort((a, b) => a.year - b.year);
+
   // this list will contain the options mapped to the available years
-  const options = yearData.map((state) => (
+  const options = sortedYearData.map((state) => (
     <option key={state.id} value={+state.year}>
       {state.year}
     </option>
   ));
-  // console.log(expenseStates);
-  // console.log(selectedYear);
+  console.log(yearData);
+  console.log(selectedYear);
 
   // show data of the selected Year
   let selectedYearExpenses = yearData.find(
@@ -138,7 +141,11 @@ useEffect hook.*/
           amount={selectedYearExpenses?.income}
           customId="income"
         ></Card>
-        <Card title="EXPENSE" amount={expensesAmountForYear} customId="expense"></Card>
+        <Card
+          title="EXPENSE"
+          amount={expensesAmountForYear}
+          customId="expense"
+        ></Card>
       </div>
     </Fragment>
   );

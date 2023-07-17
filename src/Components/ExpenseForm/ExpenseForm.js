@@ -19,7 +19,9 @@ const ExpenseForm = (props) => {
     amount: true,
     expenseType: true,
   });
-
+  // We will need this because when the List is rendered, each Tile component must have a unique key 
+  // associated with this, and as we are not getting this data from Firebase, we will have to create 
+  // our own unique id
   const randomIdForNewTransaction = useId();
 
   // When a new transaction is added, add it to list context object also
