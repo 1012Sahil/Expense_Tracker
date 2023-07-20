@@ -122,6 +122,12 @@ const PieChart = (props) => {
               outlineColor: "transparent",
             },
           },
+          tooltip: {
+            container: {
+              background: "#331D2C",
+              fontSize: 12,
+            },
+          },
         }}
       />
     </div>

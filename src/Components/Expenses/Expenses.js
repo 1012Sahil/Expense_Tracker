@@ -48,7 +48,10 @@ const Expenses = (props) => {
       // console.log(loadedExpenseData);
       setExpenseData(loadedExpenseData);
     };
-    fetchExpenses().catch((error) => {});
+    fetchExpenses().catch((error) => {
+      // console.log("FETCH ERROR");
+      // console.log(error);
+    });
   }, []);
 
   /* We are using the useEffect hook to wrap our call to loadExpenseList fn in ExpenseListProvider. 
@@ -80,9 +83,10 @@ const Expenses = (props) => {
       <hr />
       <section className={classes.list}>
         {/* Pass only the data of the year selected. */}
-        {listDataCtx.allYearTransactions.length > 0 && (
-          <ExpenseList currentSelectedYear={props.currentSelectedYear} />
-        )}
+        {listDataCtx.allYearTransactions.length > 0 &&
+          listDataCtx.allYearExpenses.length > 0 && (
+            <ExpenseList currentSelectedYear={props.currentSelectedYear} />
+          )}
       </section>
     </div>
   );

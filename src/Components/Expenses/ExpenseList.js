@@ -23,26 +23,36 @@ const ExpenseList = (props) => {
   console.log(listDataCtx.allYearExpenses);
   console.log(listDataCtx.allYearTransactions);
   const [selectedYearExpenseList, setExpenseList] = useState([]);
-  /* This component is rendering two times each time, fix this */
   useEffect(() => {
     const filteredExpenseData = listDataCtx.allYearTransactions.filter(
       (expense) => expense.year === props.currentSelectedYear
     );
     // We fixed our use of optional chaining when our selectedYearExpenseList goes undefined until
     // we first load data to context, by making sure list is rendered after context data is first loaded
-    setExpenseList(filteredExpenseData[0].transactions);
+    setExpenseList(filteredExpenseData[0]?.transactions);
     //console.log("LIST");
   }, [listDataCtx, props]);
-  // console.log("FROM EXPENSE LIST");
-  // console.log(selectedYearExpenseList);
+  // console.log("FROM EXPENSE LIST : ", selectedYearExpenseList?.length);
+
+  // function to handle delete on firebase and from context API
+  // As we can't directly use an async function in a reducer function's dispatch logic, we will issue a HTTP
+  // request here only!
+  /*const expenseDeleteHandler = async (id) => {
+    listDataCtx.deleteTransaction(currentSelectedYear, id);
+  };*/
+  const expenseDeleteHandler = (id) => {};
+
   let listElements;
-  if (selectedYearExpenseList.length > 0) {
+  if (selectedYearExpenseList?.length > 0) {
     listElements = selectedYearExpenseList.map((listElement) => (
       <Tile
+        expenseId={listElement.id}
         key={listElement.id}
         expenseTitle={listElement.desc}
         expenseAmount={listElement.amount}
         expenseType={listElement.type}
+        expenseCategory={listElement.category}
+        onDelete={expenseDeleteHandler}
       />
     ));
   }

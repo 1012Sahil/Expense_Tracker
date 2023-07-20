@@ -4,23 +4,54 @@
   display: flex;
   justify-content: space-around;
   color: black;
+  flex: 1;
   flex-wrap: wrap;
   padding: 0.5rem;
-  height: 2.5rem;
+  height: 3rem;
   margin: 0.5rem;
   text-align: center;
   font-weight: 500;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  border-right: 6px solid #FF073A;
+  border-right: 7px solid #ff073a;
 }
 
 .tile p {
-  margin: 0;
-  padding: 0.5rem;
+  padding: 0;
+  margin: auto 0;
+  text-align: center;
+  align-items: center;
 }
+
+.tile div {
+  width: 10rem;
+}
+
+.tile div p {
+  font-style: bold;
+}
+
+.title {
+  padding-top: 2px;
+  font-weight: 600;
+  padding-bottom: 0;
+}
+
+.category {
+  padding-top: 2px;
+  padding-bottom: 0;
+  vertical-align: baseline;
+  opacity: 0.5;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.amount {
+  width: 3rem;
+}
+
 .tile span {
   margin: 0;
-  padding: 0.5rem;
+  padding: 0.5rem 0.25rem;
 }
 
 .tile span svg {
@@ -28,13 +59,12 @@
   height: 25px;
 }
 
-.tile span svg:hover{
+.tile span svg:hover {
   fill: white;
   color: rgb(224, 21, 21);
   transition: ease-in-out 0.15s;
-  
 }
 
 .income {
-  border-right: 6px solid #39FF14;
+  border-right: 6px solid #39ff14;
 }

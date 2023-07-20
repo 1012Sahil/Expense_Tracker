@@ -62,7 +62,7 @@ useEffect hook.*/
     if (yearData.length !== 0) {
       // console.log("YEAR CTX");
       yearCtx.loadYears(yearData);
-      // console.log(yearCtx.expenseStates);
+       console.log(yearCtx.expenseStates);
     }
   }, [yearData, yearCtx]);
 
@@ -103,7 +103,7 @@ useEffect hook.*/
       (data) => data.year === selectedYear
     );
     expensesAmountForYear =
-      listDataCtx.allYearExpenses[expenseDataForSelectedYear].expenseAmount;
+      listDataCtx.allYearExpenses[expenseDataForSelectedYear]?.expenseAmount;
   }
 
   // console.log("AFTER");
