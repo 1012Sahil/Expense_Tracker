@@ -15,8 +15,9 @@ const PieChart = (props) => {
     setSelectedYear(props.currentSelectedYear);
   }, [props]);
 
-  /* Get the selected year's data and convert it into an array of object, which has these properties (as per Nivo's requirements)
-  {value, id, label, color} */
+  /* Get the selected year's data and convert it into an array of object, which has these properties 
+  (as per Nivo's requirements)
+  {value, id, label} */
   // console.log(listDataCtx.allYearTransactions);
   const selectedYearDataIndex = listDataCtx.allYearTransactions.findIndex(
     (data) => data.year === curSelectedYear
@@ -72,7 +73,7 @@ const PieChart = (props) => {
         cornerRadius={3}
         activeInnerRadiusOffset={13}
         activeOuterRadiusOffset={10}
-        colors={{ scheme: "nivo" }}
+        colors={{ scheme: "dark2" }}
         borderWidth={1}
         borderColor={{
           from: "color",

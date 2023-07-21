@@ -67,7 +67,7 @@ const listDataReducer = (state, action) => {
       // first transaction of year
       updatedList.push({
         year: yearOfTransaction,
-        transactions: newTransactionArray
+        transactions: newTransactionArray,
       });
       updatedExpenseAmountData.push({
         year: yearOfTransaction,
@@ -82,8 +82,54 @@ const listDataReducer = (state, action) => {
   }
 
   if (action.type === "DELETE") {
+    // not working, debug!
+    // just counter the things we did in "ADD".
     // First study how to delete data from firebase.
-    // just counter the things we did in "ADD", but also delete data from Firebase.
+    // we will have year and id of the expense to be deleted
+    let updatedListData;
+    const updatedList = state.allYearTransactions;
+    // console.log("NEW TRANSACTION");
+    // console.log(action.newTransaction);
+    const updatedExpenseAmountData = state.allYearExpenses;
+    const yearOfTransaction = +action.t_year;
+    console.log("YOT" + yearOfTransaction);
+    let amountToBeSubtracted = 0;
+
+    // remove from list
+    const existingExpenseListYearIndex = updatedList.findIndex(
+      (data) => data.year === yearOfTransaction
+    );
+
+    console.log("DELETE - ", existingExpenseListYearIndex);
+
+    updatedList[existingExpenseListYearIndex].transactions.forEach((obj) => {
+      if (obj.id === action.t_id) {
+        amountToBeSubtracted = obj.amount;
+        if (obj.type === "income") {
+          amountToBeSubtracted *= -1;
+        }
+        updatedList[existingExpenseListYearIndex].transactions.splice(
+          updatedList[existingExpenseListYearIndex].transactions.indexOf(obj),
+          1
+        );
+      }
+    });
+
+    // remove from expense data
+    // error is here, index returned is -1
+    const existingExpenseAmountIndex = updatedExpenseAmountData.findIndex(
+      (data) => data.year === yearOfTransaction
+    );
+
+    if (existingExpenseAmountIndex !== -1) {
+      updatedExpenseAmountData[existingExpenseAmountIndex].expenseAmount -=
+        amountToBeSubtracted;
+    }
+    updatedListData = {
+      allYearExpenses: updatedExpenseAmountData,
+      allYearTransactions: updatedList,
+    };
+    return updatedListData;
   }
   return defaultListData;
 };
@@ -105,7 +151,11 @@ const ExpenseListProvider = (props) => {
   // newTransaction will be an object holding transaction data, this will have been posted to Firebase also.
   const addNewTransaction = (YOT, newTransaction) => {
     // YOT is year of transaction
-    dispatchListAction({ type: "ADD", YOT : YOT, newTransaction: newTransaction });
+    dispatchListAction({
+      type: "ADD",
+      YOT: YOT,
+      newTransaction: newTransaction,
+    });
   };
 
   // Will delete an existing transaction from list and also from firebase (A challenge)

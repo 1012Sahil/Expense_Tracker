@@ -34,30 +34,21 @@ const ExpenseList = (props) => {
   }, [listDataCtx, props]);
   // console.log("FROM EXPENSE LIST : ", selectedYearExpenseList?.length);
 
-  // function to handle delete on firebase and from context API
-  // As we can't directly use an async function in a reducer function's dispatch logic, we will issue a HTTP
-  // request here only!
-  /*const expenseDeleteHandler = async (id) => {
-    listDataCtx.deleteTransaction(currentSelectedYear, id);
-  };*/
-  const expenseDeleteHandler = (id) => {};
-
   let listElements;
   if (selectedYearExpenseList?.length > 0) {
     listElements = selectedYearExpenseList.map((listElement) => (
       <Tile
         expenseId={listElement.id}
         key={listElement.id}
+        expenseYear={props.currentSelectedYear}
         expenseTitle={listElement.desc}
         expenseAmount={listElement.amount}
         expenseType={listElement.type}
         expenseCategory={listElement.category}
-        onDelete={expenseDeleteHandler}
       />
     ));
   }
-  // console.log("LIST ELEMENTS");
-  // console.log(listElements);
+  //console.log("LIST ELEMENTS" + listElements);
   return (
     <Fragment>
       <ul className={classes.list}>{listElements}</ul>

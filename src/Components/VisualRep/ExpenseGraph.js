@@ -74,15 +74,6 @@ const ExpenseGraph = (props) => {
   surplusData.sort((a, b) => a.x - b.x);
   // console.log("surplus");
   // console.log(surplusData);
-  /* theme={{
-          tooltip: {
-            container: {
-              background: "#331D2C",
-              fontSize: 12,
-            },
-          },
-        }} */
-
   // Setting data nodes for line chart
   lineChartData.push({
     id: "EXPENSES",
@@ -105,6 +96,7 @@ const ExpenseGraph = (props) => {
 
   return (
     <div className={classes.lineChart}>
+      <h2>INCOME AND EXPENSE TRENDS</h2>
       <ResponsiveLine
         data={lineChartData}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}

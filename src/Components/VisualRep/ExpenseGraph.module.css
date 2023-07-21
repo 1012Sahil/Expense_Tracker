@@ -1,7 +1,12 @@
 .lineChart{
-    padding: 1rem;
-    padding-top: 2rem;
+    padding-top: 3rem;
     padding-left: 3rem;
     height: 30rem;
     width: 45rem;
+}
+
+.lineChart h2 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-weight: 400;
 }

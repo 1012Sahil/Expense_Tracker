@@ -1,4 +1,7 @@
 .pie{
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+    padding-left: 3rem;
     height: 30rem;
     width: 48rem;
 }

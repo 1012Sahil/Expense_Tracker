@@ -1,6 +1,33 @@
+import { useContext } from "react";
 import classes from "./Tile.module.css";
+import ExpenseListContext from "../../store/expenseList-card-context";
 
 const Tile = (props) => {
+  const listDataCtx = useContext(ExpenseListContext);
+  // function to handle delete on firebase and from context API
+  // As we can't directly use an async function in a reducer function's dispatch logic, we will issue a HTTP
+  // request here only!
+  const deleteExpense = async (id) => {
+    console.log("YEAR PASSED TO DELETE" + props.expenseYear);
+    listDataCtx.deleteTransaction(props.expenseYear, id);
+    console.log("FETCH CALLED" + id + props.expenseYear);
+    const response = await fetch(
+      `https://expense-tracker-8d43a-default-rtdb.firebaseio.com/expenseList/${props.expenseYear}/${id}.json`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
+  };
+
+  const expenseDeleteHandler = (id) => {
+    deleteExpense(id).catch((error) => {
+      console.log("DELETE OPERATION FAILED!");
+    });
+  };
+
   // The border right color should indicate whether the transaction was an expense or an income one.
   const tileClasses =
     props.expenseType === "income"
@@ -8,7 +35,11 @@ const Tile = (props) => {
       : `${classes.tile}`;
   return (
     <div className={`${tileClasses}`}>
-      <span onClick={props.onDelete(props.expenseId)}>
+      <span
+        onClick={() => {
+          expenseDeleteHandler(props.expenseId);
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -25,8 +56,8 @@ const Tile = (props) => {
         </svg>
       </span>
       <div>
-      <p className={classes.title}>{props.expenseTitle}</p>
-      <p className={classes.category}>{props.expenseCategory}</p>
+        <p className={classes.title}>{props.expenseTitle}</p>
+        <p className={classes.category}>{props.expenseCategory}</p>
       </div>
       <p className={classes.amount}>${props.expenseAmount}</p>
     </div>
