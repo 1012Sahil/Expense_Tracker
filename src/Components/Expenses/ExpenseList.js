@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import {useContext, useEffect, useState } from "react";
 import Tile from "../UI/Tile";
 import classes from "./ExpenseList.module.css";
 import ExpenseListContext from "../../store/expenseList-card-context";
@@ -50,9 +50,9 @@ const ExpenseList = (props) => {
   }
   //console.log("LIST ELEMENTS" + listElements);
   return (
-    <Fragment>
+      <div className={classes.scrollDiv}>
       <ul className={classes.list}>{listElements}</ul>
-    </Fragment>
+      </div>
   );
 };
 

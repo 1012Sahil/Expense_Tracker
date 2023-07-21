@@ -1,3 +1,10 @@
+.scrollDiv {
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 45rem;
+}
+
 .list {
     padding: 0;
     margin: 0;
