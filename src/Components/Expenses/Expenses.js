@@ -44,8 +44,6 @@ const Expenses = (props) => {
         };
         loadedExpenseData.push(yearData);
       }
-      // console.log("LOADED EXPENSE DATA");
-      // console.log(loadedExpenseData);
       setExpenseData(loadedExpenseData);
     };
     fetchExpenses().catch((error) => {

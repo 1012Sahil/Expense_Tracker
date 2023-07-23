@@ -92,7 +92,7 @@ const ExpenseGraph = (props) => {
     data: surplusData,
   });
 
-  console.log(lineChartData);
+  // console.log(lineChartData);
 
   return (
     <div className={classes.lineChart}>

@@ -8,9 +8,9 @@ const Tile = (props) => {
   // As we can't directly use an async function in a reducer function's dispatch logic, we will issue a HTTP
   // request here only!
   const deleteExpense = async (id) => {
-    console.log("YEAR PASSED TO DELETE" + props.expenseYear);
+    // console.log("YEAR PASSED TO DELETE" + props.expenseYear);
     listDataCtx.deleteTransaction(props.expenseYear, id);
-    console.log("FETCH CALLED" + id + props.expenseYear);
+    // console.log("FETCH CALLED" + id + props.expenseYear);
     const response = await fetch(
       `https://expense-tracker-8d43a-default-rtdb.firebaseio.com/expenseList/${props.expenseYear}/${id}.json`,
       {

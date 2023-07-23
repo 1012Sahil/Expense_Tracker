@@ -62,7 +62,7 @@ useEffect hook.*/
     if (yearData.length !== 0) {
       // console.log("YEAR CTX");
       yearCtx.loadYears(yearData);
-       console.log(yearCtx.expenseStates);
+       // console.log(yearCtx.expenseStates);
     }
   }, [yearData, yearCtx]);
 
@@ -87,8 +87,8 @@ useEffect hook.*/
       {state.year}
     </option>
   ));
-  console.log(yearData);
-  console.log(selectedYear);
+  // console.log(yearData);
+  // console.log(selectedYear);
 
   // show data of the selected Year
   let selectedYearExpenses = yearData.find(

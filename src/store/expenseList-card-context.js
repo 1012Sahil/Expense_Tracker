@@ -13,7 +13,7 @@ const ExpenseListContext = React.createContext({
   allYearExpenses: [], // holds total expenses for all years in an array of objects
   loadExpenseList: (expenseList) => {}, // loads the entire list
   addNewTransaction: (newTransaction) => {}, // adds a single transaction after submission of form
-  deleteTransaction: ( t_year, t_id) => {}, // deletes an existing expense and also deleted from firebase
+  deleteTransaction: ( t_year, t_id) => {}, // deletes an existing expense from the context object
 });
 
 export default ExpenseListContext;

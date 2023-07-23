@@ -82,7 +82,6 @@ const listDataReducer = (state, action) => {
   }
 
   if (action.type === "DELETE") {
-    // not working, debug!
     // just counter the things we did in "ADD".
     // First study how to delete data from firebase.
     // we will have year and id of the expense to be deleted
@@ -92,7 +91,7 @@ const listDataReducer = (state, action) => {
     // console.log(action.newTransaction);
     const updatedExpenseAmountData = state.allYearExpenses;
     const yearOfTransaction = +action.t_year;
-    console.log("YOT" + yearOfTransaction);
+    // console.log("YOT" + yearOfTransaction);
     let amountToBeSubtracted = 0;
 
     // remove from list

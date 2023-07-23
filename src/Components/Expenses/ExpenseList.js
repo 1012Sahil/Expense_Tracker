@@ -19,9 +19,9 @@ const ExpenseList = (props) => {
    
   */
   // The selectedYearExpenseList already possesses the selectedYear as a key-value
-  console.log("ELIST CTX");
-  console.log(listDataCtx.allYearExpenses);
-  console.log(listDataCtx.allYearTransactions);
+  // console.log("ELIST CTX");
+  // console.log(listDataCtx.allYearExpenses);
+  // console.log(listDataCtx.allYearTransactions);
   const [selectedYearExpenseList, setExpenseList] = useState([]);
   useEffect(() => {
     const filteredExpenseData = listDataCtx.allYearTransactions.filter(
