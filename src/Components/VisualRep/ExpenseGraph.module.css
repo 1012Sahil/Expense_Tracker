@@ -11,3 +11,18 @@
     padding-bottom: 0.75rem;
     font-weight: 400;
 }
+
+@media (max-width: 768px) {
+    .lineChart {
+      padding-top: 1rem;
+      padding-left: 8.5rem;
+      padding-bottom: 5rem;
+      height: 20rem;
+      width: 30rem;
+    }
+  
+    .lineChart h2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }

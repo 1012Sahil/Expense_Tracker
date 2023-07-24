@@ -12,6 +12,7 @@ const ExpenseGraph = (props) => {
   const listDataCtx = useContext(ExpenseListContext);
   const yearCtx = useContext(YearContext);
   const t_amountData = listDataCtx.allYearExpenses;
+  const t_listData = listDataCtx.allYearTransactions;
 
   if (t_amountData.length < 0 || yearCtx.expenseStates.length < 0) {
     return;
@@ -19,12 +20,39 @@ const ExpenseGraph = (props) => {
 
   const lineChartData = [];
   // Will store surplus/loss in a map
+  // set to store years for which atleast one expense is available
+  const expenseYearSet = new Set();
   const surplusCalc = new Map();
+  /* Make sure that you don't show data in line chart of those years that doesn't have any expenses. */
 
+  // The Expense Data
+  const expenseAmountData = [];
+  for (const expense of t_amountData) {
+    const existingExpenseListYearIndex = t_listData.findIndex(
+      (data) => data.year === expense.year
+    );
+    // if no transaction exists for this year, don't
+    if (t_listData[existingExpenseListYearIndex].transactions.length === 0) {
+      continue;
+    }
+    expenseYearSet.add(expense.year);
+    expenseAmountData.push({
+      x: expense.year,
+      y: expense.expenseAmount,
+    });
+    // first I will add the expense in negative, then add the balance to it
+    surplusCalc.set(expense.year, -expense.expenseAmount);
+  }
+  // sort expense data
+  expenseAmountData.sort((a, b) => a.x - b.x);
+  // console.log(expenseAmountData);
   // Balance and Income Data
   const incomeData = [];
   const balanceData = [];
   for (const data of yearCtx.expenseStates) {
+    if (!expenseYearSet.has(data.year)) {
+      continue;
+    }
     incomeData.push({
       x: data.year,
       y: data.income,
@@ -34,8 +62,13 @@ const ExpenseGraph = (props) => {
       x: data.year,
       y: data.balance,
     });
-    // first I will calculate the balance, then subtract the expense from it
-    surplusCalc.set(data.year, data.balance);
+    // first I will add the expense in negative, then add the balance to it
+    let expenseAmount = surplusCalc.get(data.year);
+    if (expenseAmount === undefined) {
+      expenseAmount = 0;
+    }
+
+    surplusCalc.set(data.year, expenseAmount + data.balance);
   }
   // sort the arrays acc to year before passing to line chart
   incomeData.sort((a, b) => a.x - b.x);
@@ -43,24 +76,6 @@ const ExpenseGraph = (props) => {
   // console.log("INCOME DATA");
   // console.log(incomeData);
   // console.log(balanceData);
-
-  // The Expense Data
-  const expenseAmountData = [];
-  for (const expense of t_amountData) {
-    expenseAmountData.push({
-      x: expense.year,
-      y: expense.expenseAmount,
-    });
-    let bal = surplusCalc.get(expense.year);
-    if (bal === undefined) {
-      bal = 0;
-    }
-
-    surplusCalc.set(expense.year, bal - expense.expenseAmount);
-  }
-  // sort expense data
-  expenseAmountData.sort((a, b) => a.x - b.x);
-  // console.log(expenseAmountData);
 
   // Calculating Surplus or Loss Each Year by iterating the map
   const surplusData = [];
@@ -162,9 +177,9 @@ const ExpenseGraph = (props) => {
               text: {
                 fill: "#FFFFFF",
                 fontSize: 12,
-                letterSpacing: 2
-              }
-            }
+                letterSpacing: 2,
+              },
+            },
           },
           legends: {
             text: {
@@ -176,7 +191,7 @@ const ExpenseGraph = (props) => {
             line: {
               stroke: "#ffffff",
               strokeWidth: 1,
-              strokeOpacity: 0.8
+              strokeOpacity: 0.8,
             },
           },
         }}

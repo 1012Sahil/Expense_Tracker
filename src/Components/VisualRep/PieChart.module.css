@@ -11,3 +11,18 @@
     padding-bottom: 0.75rem;
     font-weight: 400;
 }
+
+@media (max-width: 768px) {
+    .pie {
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+      padding-left: 7rem;
+      height: 22rem;
+      width: 33rem;
+    }
+  
+    .pie h2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }

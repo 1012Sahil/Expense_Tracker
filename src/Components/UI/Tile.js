@@ -21,7 +21,6 @@ const Tile = (props) => {
       throw new Error("Something went wrong!");
     }
   };
-
   const expenseDeleteHandler = (id) => {
     deleteExpense(id).catch((error) => {
       console.log("DELETE OPERATION FAILED!");

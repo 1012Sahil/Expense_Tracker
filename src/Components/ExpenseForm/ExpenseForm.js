@@ -3,7 +3,7 @@ import classes from "./ExpenseForm.module.css";
 import ExpenseListContext from "../../store/expenseList-card-context";
 
 // functions to check validity of form input data
-const yearValidityChecker = (value) => value >= 2000 && value <= 2030;
+const yearValidityChecker = (value) => value >= 2000 && value < 2024;
 const categoryValidityChecker = (value) => value !== "";
 const amountValidityChecker = (value) => value > 0;
 const descValidityChecker = (value) => value.trim().length >= 3;
@@ -134,7 +134,7 @@ const ExpenseForm = (props) => {
             placeholder="YYYY"
             ref={yearInputRef}
             min="2000"
-            max="2030"
+            max="2023"
             id="year"
           />
           {!formInputsValidity.year && <p>Please select a valid year.</p>}

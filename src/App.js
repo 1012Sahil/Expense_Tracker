@@ -48,7 +48,7 @@ value from the closest matching Provider above it in the tree. */
   return (
     <ExpenseListProvider>
     <YearProvider>
-        <h1>Expense Tracker</h1>
+        <h1>Money Minder</h1>
         <section className="main">
           <div className="left">
             <PieChart currentSelectedYear={currentSelectedYear}></PieChart>
